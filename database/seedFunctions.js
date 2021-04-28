@@ -1,19 +1,33 @@
 /* eslint-disable no-await-in-loop */
 const axios = require('axios');
 
+const Promise = require('bluebird');
+const LoremIpsum = Promise.promisifyAll(require('lorem-ipsum').LoremIpsum);
+
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4
+  },
+  wordsPerSentence: {
+    max: 16,
+    min: 4
+  }
+});
+
 const generateRandomPercentage = () => (Math.floor(Math.random() * 100) / 100);
 
 const generateNumberWithinRange = (min, max) => (Math.floor(Math.random() * (max - min) + min));
 
-const generateFillerText = async (options) => {
-  let text;
-  if (options.paras) {
-    text = await axios.get(`https://baconipsum.com/api/?type=meat-and-filler&paras=${options.paras}&format=text`);
-  } else if (options.sentences) {
-    text = await axios.get(`https://baconipsum.com/api/?type=meat-and-filler&sentences=${options.sentences}&format=text`);
-  }
-  return text.data;
-};
+// const generateFillerText = async (options) => {
+//   let text;
+//   if (options.paras) {
+//     text = await axios.get(`https://baconipsum.com/api/?type=meat-and-filler&paras=${options.paras}&format=text`);
+//   } else if (options.sentences) {
+//     text = await axios.get(`https://baconipsum.com/api/?type=meat-and-filler&sentences=${options.sentences}&format=text`);
+//   }
+//   return text.data;
+// };
 
 const generateLanguageList = () => {
   const languages = [
@@ -102,7 +116,8 @@ const generateMetadata = () => {
 const generateWhatYouWillLearn = async () => {
   const whatYouWillLearn = [];
   for (let i = 0; i < 4; i++) {
-    const text = await generateFillerText({ sentences: 2 });
+    // const text = await generateFillerText({ sentences: 2 });
+    const text = await lorem.generateSentences(2);
     whatYouWillLearn.push(text);
   }
   return whatYouWillLearn;
@@ -112,7 +127,8 @@ const generateSkillsYouWillGain = async () => {
   const skills = [];
   const numOfSkills = generateNumberWithinRange(0, 10);
   for (let i = 0; i < numOfSkills; i++) {
-    let skill = await generateFillerText({ sentences: 1 });
+    // let skill = await generateFillerText({ sentences: 1 });
+    let skill = await lorem.generateSentences(1);
     if (skill.split(' ').length > 4) {
       const numOfWords = generateNumberWithinRange(2, 4);
       skill = skill.split(' ').slice(0, numOfWords).join(' ');
@@ -129,7 +145,8 @@ const generateRecords = async (numToGenerate) => {
     const item = {
       course_id: i, // 1 - 100
       recent_views: Math.floor(Math.random() * 10000000), // Random number between 0 and 10 million
-      description: await generateFillerText({ paras: 4 }), // Bacon ipsum - 4 paragraphs
+      // description: await generateFillerText({ paras: 4 }), // Bacon ipsum - 4 paragraphs
+      description: await lorem.generateParagraphs(4),
       learner_career_outcomes: await generateLearnerCareerOutcomes(),
       metadata: await generateMetadata(),
       what_you_will_learn: await generateWhatYouWillLearn(),
@@ -156,7 +173,7 @@ const seedDatabase = async (Description) => {
 module.exports = {
   generateRandomPercentage,
   generateRecords,
-  generateFillerText,
+  // generateFillerText,
   generateMetadata,
   generateNumberWithinRange,
   generateSkillsYouWillGain,
