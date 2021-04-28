@@ -7,29 +7,34 @@ const app = express();
 const PORT = 3002;
 
 app.use(cors());
+
+// routeing
 app.use(express.static('./public'));
 
-app.get('/api/about/:id', (req, res) => {
+app.get('/:id', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../public/index.html'));
+});
+
+app.get('/api/about/:id', async (req, res) => {
   console.log('New request for', req.params.id);
-  db.getOne(req.params.id)
-    .then((data) => {
-      if (!data) {
-        res.sendStatus(404);
-      } else {
-        res.send(data).status(200);
-      }
-    })
-    .catch(() => {
-      res.sendStatus(404);
-    });
+  try {
+    let data = await db.getOne(req.params.id);
+    res.send(data);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 app.post('/api/about/:id', (req, res) => {
   res.sendStatus(405);
 });
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));
+app.put('/api/about/:id', (req, res) => {
+  res.send('Got a PUT request at /user');
+});
+
+app.delete('/api/about/:id', (req, res) => {
+  res.send('Got a DELETE request at /user');
 });
 
 // Allows the server to listen if it's in dev or prod, but not while testing

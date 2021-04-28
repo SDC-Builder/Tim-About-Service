@@ -1,6 +1,8 @@
 {
   "name": "about",
-  "sideEffects": ["**/*.css"],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "version": "",
   "description": "",
   "author": "Shane Sutro",
@@ -9,8 +11,8 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "server-start": "nodemon ./server/index.js",
-    "start": "node ./server/index.js",
+    "server-start": "nodemon server/index.js",
+    "start": "node server/index.js",
     "watch": "webpack --watch",
     "react-start": "webpack serve --open",
     "build": "webpack && docker build -t shanesutro/service-about .",

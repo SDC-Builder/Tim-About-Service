@@ -15,4 +15,13 @@ module.exports = {
       });
     })
   ),
+  deleteOne: (id) => {
+
+  },
+  editOne: (id, data) => {
+
+  },
+  addOne: (id, data) => {
+
+  },
 };
