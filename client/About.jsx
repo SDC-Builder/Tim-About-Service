@@ -37,7 +37,7 @@ class About extends React.Component {
         this.setState({ courseInfo: data });
       })
       .catch((err) => console.error(err));
-    fetch('/api/svgs')
+    fetch('https://gifbucket.s3-us-west-1.amazonaws.com/svgs.js')
       .then((response) => response.json())
       .then((data) => {
         this.setState({ svgs: data });
