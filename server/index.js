@@ -10,7 +10,7 @@ const db = require('../database/model');
 const app = express();
 const PORT = 3002;
 
-app.use(cors());
+app.use(cors({origin: '*'}));
 app.use(bodyParser.json());
 
 // routeing
