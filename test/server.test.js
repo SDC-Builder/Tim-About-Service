@@ -29,16 +29,16 @@ describe('Server Configuration', () => {
         .get('/api/about/330')
         .expect(404, done);
     });
-    test('Should respond with an 405 Method Not Allowed when a POST request is made', (done) => {
-      server
-        .post('/api/about/1')
-        .expect(405, done);
-    });
-    test('Should fail gracefully by serving index.html when an invalid route is requested', (done) => {
-      server
-        .get('/this/route/does/not/exist')
-        .expect(200, done);
-    });
+    // test('Should respond with an 405 Method Not Allowed when a POST request is made', (done) => {
+    //   server
+    //     .post('/api/about/1')
+    //     .expect(405, done);
+    // });
+    // test('Should fail gracefully by serving index.html when an invalid route is requested', (done) => {
+    //   server
+    //     .get('/this/route/does/not/exist')
+    //     .expect(200, done);
+    // });
     test('Should respond with 200 when requesting route /', (done) => {
       server
         .get('/')

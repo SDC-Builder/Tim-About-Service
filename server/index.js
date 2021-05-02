@@ -32,8 +32,8 @@ app.get('/api/about/:id', async (req, res) => {
 // possible speed up later would be to only have body-parser middleware for in post route
 app.post('/api/about/:id', async (req, res) => {
   try {
-    let data = await db.editOne(req.params.id, req.body);
-    res.send(data);
+    await db.editOne(req.params.id, req.body);
+    res.send('Record Updated');
   } catch (err) {
     res.status(500).send(err);
   }
@@ -42,8 +42,8 @@ app.post('/api/about/:id', async (req, res) => {
 // possible speed up later would be to only have body-parser middleware for in put route
 app.put('/api/about', async (req, res) => {
   try {
-    let coonfirmationMessage = await db.addOne(req.body);
-    res.send(coonfirmationMessage);
+    await db.addOne(req.body);
+    res.send('Record Added');
   } catch (err) {
     res.status(500).send(err);
   }
@@ -51,8 +51,8 @@ app.put('/api/about', async (req, res) => {
 
 app.delete('/api/about/:id', async (req, res) => {
   try {
-    let coonfirmationMessage = await db.deleteOne(req.params.id);
-    res.send(coonfirmationMessage);
+    await db.deleteOne(req.params.id);
+    res.send('Record Deleted');
   } catch (err) {
     res.status(500).send(err);
   }

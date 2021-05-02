@@ -18,6 +18,7 @@
 ## Table of Contents
 
 1. [Usage](#Usage)
+1. [CRUD_API](#CRUD_API)
 1. [Requirements](#requirements)
 1. [Development](#development)
 
@@ -26,6 +27,117 @@
 > From within the `db` directory, run `seedRunner.js` to seed the database and wait for it to complete.
 > Run `npm build` to build the webpack bundle
 > Run `npm server-dev` to start the server. Server runs on port 3002.
+
+## CRUD_API
+### Endpoints:
+```sh
+/api/about/:id
+```
+
+### GET:
+Request
+```sh
+GET /api/about/:id
+```
+Response
+```sh
+Status: 200
+Body:
+{
+    "course_id": Number,
+    "description": String,
+    "what_you_will_learn": [
+        ArrayOfStrings
+    ],
+    "skills_you_will_gain": [
+        ArrayOfStrings
+    ],
+    "recent_views": Number,
+    "learner_career_outcomes": [
+        {
+            "icon": String,
+            "pct": Number,
+            "outcome": String
+        },
+    ],
+    "metadata": [
+        {
+            "icon": String,
+            "title": String,
+            "subtitle": String
+        },
+    ]
+}
+```
+
+### PUT:
+Request
+```sh
+PUT /api/about/:id
+
+Body:
+{
+    "course_id": Number,
+    "description": String,
+    "what_you_will_learn": [
+        ArrayOfStrings
+    ],
+    "skills_you_will_gain": [
+        ArrayOfStrings
+    ],
+    "recent_views": Number,
+    "learner_career_outcomes": [
+        {
+            "icon": String,
+            "pct": Number,
+            "outcome": String
+        },
+    ],
+    "metadata": [
+        {
+            "icon": String,
+            "title": String,
+            "subtitle": String
+        },
+    ]
+}
+```
+Response
+```sh
+Status: 200
+Body: Record Added
+```
+
+
+### POST:
+Request
+```sh
+POST /api/about/:id
+
+Body:
+{
+  "recent_views": Number
+}
+```
+
+Response
+```sh
+Status: 200
+Body: Record Updated
+```
+
+### DELETE:
+Request
+```sh
+DELETE /api/about/:id
+```
+
+Response
+```sh
+Status: 200
+Body: Record Deleted
+```
+
 
 ## Requirements
 
