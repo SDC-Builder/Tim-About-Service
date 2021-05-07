@@ -13,7 +13,6 @@ const PORT = 3002;
 app.use(cors({origin: '*'}));
 app.use(bodyParser.json());
 
-// routeing
 app.use(express.static('./public'));
 
 app.get('/:id', (req, res) => {
@@ -23,9 +22,10 @@ app.get('/:id', (req, res) => {
 app.get('/api/about/:id', async (req, res) => {
   try {
     let data = await db.getOne(req.params.id);
+    if (!data) { throw 'gotBadData' }
     res.send(data);
   } catch (err) {
-    res.status(500).send(err);
+    res.sendStatus(404);
   }
 });
 
@@ -56,6 +56,10 @@ app.delete('/api/about/:id', async (req, res) => {
   } catch (err) {
     res.status(500).send(err);
   }
+});
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
 // Allows the server to listen if it's in dev or prod, but not while testing

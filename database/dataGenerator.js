@@ -4,12 +4,12 @@ const LoremIpsum = Promise.promisifyAll(require('lorem-ipsum').LoremIpsum);
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
     max: 8,
-    min: 4
+    min: 4,
   },
   wordsPerSentence: {
     max: 16,
-    min: 4
-  }
+    min: 4,
+  },
 });
 
 const generateRandomPercentage = () => (Math.floor(Math.random() * 100) / 100);
@@ -135,10 +135,3 @@ module.exports.generateRecord = async (i) => {
   };
   return item;
 };
-
-// generateRecord(1)
-//   .then((result) => {
-//     console.log(result);
-//   });
-
-// module.exports.generateRecord = generateRecord;

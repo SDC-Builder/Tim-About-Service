@@ -2,6 +2,7 @@
 const request = require('supertest');
 const app = require('../server/index');
 const { db } = require('../database/db');
+const putInfo = require('./mockPutRequest.js');
 
 describe('Server Configuration', () => {
   let server;
@@ -26,22 +27,39 @@ describe('Server Configuration', () => {
     });
     test('Should respond appropriately when a non-existent record is requested', (done) => {
       server
-        .get('/api/about/330')
+        .get('/api/about/10000003')
         .expect(404, done);
     });
-    // test('Should respond with an 405 Method Not Allowed when a POST request is made', (done) => {
-    //   server
-    //     .post('/api/about/1')
-    //     .expect(405, done);
-    // });
-    // test('Should fail gracefully by serving index.html when an invalid route is requested', (done) => {
-    //   server
-    //     .get('/this/route/does/not/exist')
-    //     .expect(200, done);
-    // });
+    test('Should fail gracefully by serving index.html when an invalid route is requested', (done) => {
+      server
+        .get('/this/route/does/not/exist')
+        .expect(200, done);
+    });
     test('Should respond with 200 when requesting route /', (done) => {
       server
         .get('/')
+        .expect(200)
+        .end(done);
+    });
+    test('Should respond with 200 when POSTing data', (done) => {
+      server
+        .post('/api/about/1')
+        .send({
+          recent_views: 5,
+        })
+        .expect(200)
+        .end(done);
+    });
+    test('Should respond wtih 200 when PUTing data', (done) => {
+      server
+        .put('/api/about')
+        .send(putInfo)
+        .expect(200)
+        .end(done);
+    });
+    test('Should respond with 200 when DELETEing data', (done) => {
+      server
+        .delete('/api/about/10000001')
         .expect(200)
         .end(done);
     });

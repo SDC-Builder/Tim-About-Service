@@ -1,29 +1,11 @@
-// const postgres = require('postgres');
+const cassandra = require('cassandra-driver');
 
-// console.log('message');
-
-// const sql = postgres('postgres://postgres:Timmy@host:5432/users');
-
-// (async () => {
-//   const someResult = await sql`
-//   select * from users
-//   `;
-
-//   console.log('hi');
-//   console.log(someResult);
-// })();
-
-const { Pool, Client } = require('pg');
-
-const client = new Client({
-  user: 'postgres',
-  host: '127.0.0.1',
-  database: 'mydb',
-  password: 'Timmy',
-  port: 5432,
+const client = new cassandra.Client({
+  localDataCenter: 'datacenter1',
+  keyspace: 'javatpoint',
+  contactPoints: ['127.0.0.1']
 });
 
-// practice inserting into postgres
 const stringArray = ['998',
   'Quisquam rerum dignissimos sint vel mollitia. Dignissimos animi excepturi. Tempora facilis ut nisi quis unde. Sint id qui rem. Non fugiat non asperiores qui nihil numquam eum laborum minima. Fugiat molestias voluptas facilis dolores a consequatur enim quo eligendi. Veritatis enim et qui. Aliquid nisi commodi animi quia nisi dolores nobis saepe ducimus. Nulla sint aut ut rerum aliquam excepturi in ut non. Similique ducimus illo. Voluptatibus similique debitis minima. Tempore ducimus quia perspiciatis maxime et. Asperiores unde est sint. In eaque nihil omnis reiciendis aut consequuntur rerum. Veritatis sed assumenda doloremque alias quo debitis non. Reiciendis rerum amet eum asperiores odio ea vel. A eum rerum. Quia non quisquam laboriosam quaerat ut eos tenetur aut repellendus. Qui asperiores voluptatum et facilis aut quis id. Eveniet corrupti ducimus quasi beatae facere aliquid id maxime quos. Asperiores debitis aspernatur aut sed doloremque cupiditate. Repellat facere sed. Inventore ',
   'Russian;English;Hebrew;Spanish;Hindi;Japanese',
@@ -45,28 +27,20 @@ console.log(stringArray[6]);
 console.log(stringArray[7]);
 console.log(stringArray[8]);
 
-// client.connect()
+// const query = 'SELECT name, email FROM users WHERE key = ?';
 
-// client.query('SELECT * from users', (err, res) => {
-//   console.log(err, res)
-//   console.log(res.rows)
-//   client.end()
-// });
+// const query = 'select * from about';
 
-// client.connect()
+// const query = `select * from testy`
 
-// client.query(`INSERT INTO about (id, about, recent_views, subtitle, willLearn, willGain, directionPerc, benefitPerc, promotionPerc) values (${id}, '${stringArray[1]}', '${stringArray[3]}', '${stringArray[2]}', '${stringArray[4]}', '${stringArray[5]}', '${stringArray[6]}', '${stringArray[7]}', '${stringArray[8]}')`, (err, res) => {
-//   console.log(err, res)
-//   client.end()
-// });
+// const query = `INSERT INTO about (id, about, recent_views, subtitle, willLearn, willGain, directionPerc, benefitPerc, promotionPerc) values (${id}, '${stringArray[1]}', '${stringArray[3]}', '${stringArray[2]}', '${stringArray[4]}', '${stringArray[5]}', '${stringArray[6]}', '${stringArray[7]}', '${stringArray[8]}')`
 
-client.connect();
-const start = Date.now();
-client.query('SELECT * from about where id = 9999999', (err, res) => {
-  console.log(err, res);
-  console.log(res.rows);
+(async () => {
+  const start = Date.now();
+  const result = await client.execute(`select * from about where id = 9999999`);
   const now = Date.now();
   const miliSecondsElapsed = (now - start);
-  console.log(miliSecondsElapsed);
-  client.end();
-});
+  console.log(`elapsed miliseconds is ${miliSecondsElapsed}`);
+  console.log(result);
+  client.shutdown();
+})();
