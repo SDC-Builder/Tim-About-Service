@@ -18,22 +18,26 @@ describe('Server Configuration', () => {
         .expect((res) => {
           expect(res.body.what_you_will_learn).toBeTruthy();
         })
-        .expect(200, done);
+        .expect(200)
+        .end(done);
     });
     test('Should respond with a 404 when the ID passed is not a number', (done) => {
       server
         .get('/api/about/not-a-number')
-        .expect(404, done);
+        .expect(404)
+        .end(done);
     });
     test('Should respond appropriately when a non-existent record is requested', (done) => {
       server
         .get('/api/about/10000003')
-        .expect(404, done);
+        .expect(404)
+        .end(done);
     });
     test('Should fail gracefully by serving index.html when an invalid route is requested', (done) => {
       server
         .get('/this/route/does/not/exist')
-        .expect(200, done);
+        .expect(200)
+        .end(done);
     });
     test('Should respond with 200 when requesting route /', (done) => {
       server
