@@ -7,7 +7,8 @@ if (process.env.NODE_ENV !== 'production' && !process.env.CI) {
 
 const { Schema } = mongoose;
 
-mongoose.connect(process.env.ABOUT_MONGODB_URI, {
+// mongoose.connect(process.env.ABOUT_MONGODB_URI, {
+mongoose.connect('mongodb://localhost/aboutService', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
