@@ -29,7 +29,7 @@ describe('Server Configuration', () => {
     });
     test('Should respond appropriately when a non-existent record is requested', (done) => {
       server
-        .get('/api/about/10000003')
+        .get('/api/about/10000009')
         .expect(404)
         .end(done);
     });
