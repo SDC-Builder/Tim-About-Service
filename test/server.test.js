@@ -11,16 +11,6 @@ describe('Server Configuration', () => {
   });
 
   describe('/api/about/:id route', () => {
-    test('Should respond with a record from the database', (done) => {
-      server
-        .get('/api/about/12')
-        // .expect('Content-Type', /json/)
-        // .expect((res) => {
-        //   expect(res.body.what_you_will_learn).toBeTruthy();
-        // })
-        .expect(200)
-        .end(done);
-    });
     test('Should respond with a 404 when the ID passed is not a number', (done) => {
       server
         .get('/api/about/not-a-number')
@@ -58,6 +48,16 @@ describe('Server Configuration', () => {
       server
         .put('/api/about')
         .send(putInfo)
+        .expect(200)
+        .end(done);
+    });
+    test('Should respond with a record from the database', (done) => {
+      server
+        .get('/api/about/10000001')
+        // .expect('Content-Type', /json/)
+        // .expect((res) => {
+        //   expect(res.body.what_you_will_learn).toBeTruthy();
+        // })
         .expect(200)
         .end(done);
     });
