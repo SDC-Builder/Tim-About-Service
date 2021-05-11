@@ -54,10 +54,10 @@ describe('Server Configuration', () => {
     test('Should respond with a record from the database', (done) => {
       server
         .get('/api/about/10000001')
-        // .expect('Content-Type', /json/)
-        // .expect((res) => {
-        //   expect(res.body.what_you_will_learn).toBeTruthy();
-        // })
+        .expect('Content-Type', /json/)
+        .expect((res) => {
+          expect(res.body.what_you_will_learn).toBeTruthy();
+        })
         .expect(200)
         .end(done);
     });
