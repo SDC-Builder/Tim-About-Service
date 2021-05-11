@@ -1,8 +1,11 @@
 language: node_js
 node_js:
 - node
+services: mongodb
 script:
   - npm test -- --coverage
+env:
+  - ABOUT_MONGODB_URI=mongodb://localhost/aboutService
 after_script:
   - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
 notifications:

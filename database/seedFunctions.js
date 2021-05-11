@@ -7,27 +7,27 @@ const LoremIpsum = Promise.promisifyAll(require('lorem-ipsum').LoremIpsum);
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
     max: 8,
-    min: 4
+    min: 4,
   },
   wordsPerSentence: {
     max: 16,
-    min: 4
-  }
+    min: 4,
+  },
 });
 
 const generateRandomPercentage = () => (Math.floor(Math.random() * 100) / 100);
 
 const generateNumberWithinRange = (min, max) => (Math.floor(Math.random() * (max - min) + min));
 
-// const generateFillerText = async (options) => {
-//   let text;
-//   if (options.paras) {
-//     text = await axios.get(`https://baconipsum.com/api/?type=meat-and-filler&paras=${options.paras}&format=text`);
-//   } else if (options.sentences) {
-//     text = await axios.get(`https://baconipsum.com/api/?type=meat-and-filler&sentences=${options.sentences}&format=text`);
-//   }
-//   return text.data;
-// };
+const generateFillerText = async (options) => {
+  let text;
+  if (options.paras) {
+    text = await axios.get(`https://baconipsum.com/api/?type=meat-and-filler&paras=${options.paras}&format=text`);
+  } else if (options.sentences) {
+    text = await axios.get(`https://baconipsum.com/api/?type=meat-and-filler&sentences=${options.sentences}&format=text`);
+  }
+  return text.data;
+};
 
 const generateLanguageList = () => {
   const languages = [
@@ -173,7 +173,7 @@ const seedDatabase = async (Description) => {
 module.exports = {
   generateRandomPercentage,
   generateRecords,
-  // generateFillerText,
+  generateFillerText,
   generateMetadata,
   generateNumberWithinRange,
   generateSkillsYouWillGain,
