@@ -33,6 +33,7 @@
     "faker": "^5.5.3",
     "lorem-ipsum": "^2.0.3",
     "mongoose": "^5.11.18",
+    "newrelic": "^7.4.0",
     "pg": "^8.6.0",
     "postgres": "^1.0.2",
     "react": "^17.0.1",

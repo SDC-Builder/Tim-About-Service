@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 const request = require('supertest');
-const app = require('../server/index');
+const app = require('../server/app');
 const { db } = require('../database/db');
-const putInfo = require('./mockPutRequest.js');
+const postInfo = require('./mockPostRequest.js');
 
 describe('Server Configuration', () => {
   let server;
@@ -38,16 +38,16 @@ describe('Server Configuration', () => {
     test('Should respond with 200 when POSTing data', (done) => {
       server
         .post('/api/about/1')
-        .send({
-          recent_views: 5,
-        })
+        .send(postInfo)
         .expect(200)
         .end(done);
     });
     test('Should respond wtih 200 when PUTing data', (done) => {
       server
         .put('/api/about')
-        .send(putInfo)
+        .send({
+          recent_views: 5,
+        })
         .expect(200)
         .end(done);
     });

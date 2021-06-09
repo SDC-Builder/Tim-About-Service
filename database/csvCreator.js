@@ -62,11 +62,11 @@ const generateWhatYouWillLearn = () => {
   return whatYouWillLearn;
 };
 
-writer.pipe(fs.createWriteStream('./data/csvTest.csv'));
+writer.pipe(fs.createWriteStream('./data/csvTestWithName3.csv'));
 
 (async () => {
   for (let i = 1; i < 10000000; i++) {
-    const id = i; // integer
+    const numName = `name${i}`; // integer
     let description = faker.lorem.paragraph(40);
     if (description.length >= 1000) {
       description = description.slice(0, 999);
@@ -86,10 +86,10 @@ writer.pipe(fs.createWriteStream('./data/csvTest.csv'));
     const careerPromotionPercentage = Math.round(generateRandomPercentage() * 100);
 
     writer.write({
-      id,
+      numName,
       description,
-      subtitle,
       recent_views,
+      subtitle,
       what_you_will_learn,
       skills_you_will_gain,
       careerDirectionPercentage,

@@ -35,15 +35,15 @@ const stringArray = ['998',
   '80'];
 
 const id = Number(stringArray[0]);
-console.log(id);
-console.log(stringArray[1]);
-console.log(stringArray[3]);
-console.log(stringArray[2]);
-console.log(stringArray[4]);
-console.log(stringArray[5]);
-console.log(stringArray[6]);
-console.log(stringArray[7]);
-console.log(stringArray[8]);
+// console.log(id);
+// console.log(stringArray[1]);
+// console.log(stringArray[3]);
+// console.log(stringArray[2]);
+// console.log(stringArray[4]);
+// console.log(stringArray[5]);
+// console.log(stringArray[6]);
+// console.log(stringArray[7]);
+// console.log(stringArray[8]);
 
 // client.connect()
 
@@ -60,13 +60,28 @@ console.log(stringArray[8]);
 //   client.end()
 // });
 
-client.connect();
-const start = Date.now();
-client.query('SELECT * from about where id = 9999999', (err, res) => {
-  console.log(err, res);
-  console.log(res.rows);
-  const now = Date.now();
-  const miliSecondsElapsed = (now - start);
-  console.log(miliSecondsElapsed);
-  client.end();
-});
+(async () => {
+  try {
+    await client.connect();
+    let start = Date.now();
+    let result = await client.query('select * from about where id = 9999999');
+    let now = Date.now();
+    // console.log(result.rows[0]);
+    let miliSecondsElapsed = (now - start);
+    console.log(miliSecondsElapsed);
+    start = Date.now();
+    result = await client.query('SELECT * from about where id = 9999999');
+    now = Date.now();
+    miliSecondsElapsed = (now - start);
+    console.log(miliSecondsElapsed);
+    start = Date.now();
+    result = await client.query('SELECT * from about where id = 9999897');
+    now = Date.now();
+    miliSecondsElapsed = (now - start);
+    console.log(miliSecondsElapsed);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    client.end();
+  }
+})();
