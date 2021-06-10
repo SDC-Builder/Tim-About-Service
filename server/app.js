@@ -4,17 +4,19 @@ const cors = require('cors');
 const path = require('path');
 const { requestAssembler } = require('./requestBuilder');
 
+const db = require('../database/cassandra/model');
+
 // db switcher, for comparing performance of multiple db's in development
-if (process.env.db === 'Cassandra') {
-  // eslint-disable-next-line vars-on-top, no-var, global-require, no-redeclare, block-scoped-var
-  var db = require('../database/cassandra/model');
-} else if (process.env.db === 'Postgres') {
-  // eslint-disable-next-line vars-on-top, no-var, global-require, no-redeclare, block-scoped-var
-  var db = require('../database/postgres/model');
-} else if (process.env.db === 'Mongo') {
-  // eslint-disable-next-line vars-on-top, no-var, global-require, no-redeclare, block-scoped-var
-  var db = require('../database/model');
-}
+// if (process.env.db === 'Cassandra') {
+//   // eslint-disable-next-line vars-on-top, no-var, global-require, no-redeclare, block-scoped-var
+//   var db = require('../database/cassandra/model');
+// } else if (process.env.db === 'Postgres') {
+//   // eslint-disable-next-line vars-on-top, no-var, global-require, no-redeclare, block-scoped-var
+//   var db = require('../database/postgres/model');
+// } else if (process.env.db === 'Mongo') {
+//   // eslint-disable-next-line vars-on-top, no-var, global-require, no-redeclare, block-scoped-var
+//   var db = require('../database/model');
+// }
 
 const app = express();
 
@@ -36,6 +38,10 @@ app.get('/:id', (req, res) => {
 //     res.sendStatus(404);
 //   }
 // });
+
+app.get('/testing/hello', (req, res) => {
+  res.send('Hello World!');
+});
 
 app.get('/api/about/:id', async (req, res) => {
   try {

@@ -6,8 +6,14 @@ module.exports = {
     // eslint-disable-next-line no-new, arrow-body-style, no-async-promise-executor
     return new Promise(async (resolve, reject) => {
       try {
+        // console.log('getOne request')
         const result = await client.execute(`select * from about where id = ${id}`);
+        // console.log(result);
         const rowOfData = result.rows[0];
+        // console.log('----------------------------------')
+        // console.log(result.rowLength);
+        // console.log('----------------------------------')
+        // console.log(rowOfData)
         resolve(rowOfData);
       } catch (err) {
         reject(err);
