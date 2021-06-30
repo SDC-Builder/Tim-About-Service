@@ -159,3 +159,13 @@ Postgres | 1,000 RPS | 60000 | 139 | 97%
 - Sustained 1,500 RPS to random routes at back 10% of db, tested wtih Loader.io
 
 <img width="1248" alt="Screen Shot 2021-06-16 at 10 47 43 PM" src="https://user-images.githubusercontent.com/71040019/123898948-1edbd580-d91b-11eb-9d1a-aac97251ba99.png">
+
+
+### SSR Deployment and Performance
+
+Google PageSpeed insight score of 99
+
+<img width="660" alt="Screen Shot 2021-06-21 at 11 42 21 PM" src="https://user-images.githubusercontent.com/71040019/123899243-a6c1df80-d91b-11eb-8578-b66656dd44ca.png">
+
+System Architecture
+![Server Design (1)](https://user-images.githubusercontent.com/71040019/123899600-5eef8800-d91c-11eb-8650-daf6c353eedf.jpeg)
