@@ -170,3 +170,5 @@ Google PageSpeed insight score of 99
 
 <img width="660" alt="Screen Shot 2021-06-21 at 11 42 21 PM" src="https://user-images.githubusercontent.com/71040019/123899243-a6c1df80-d91b-11eb-8578-b66656dd44ca.png">
 
+Screenshot of deployed page
+<img width="1792" alt="Screen Shot 2021-06-20 at 10 41 30 PM" src="https://user-images.githubusercontent.com/71040019/123904308-1ee0d300-d925-11eb-8f44-5adf781b4112.png">
