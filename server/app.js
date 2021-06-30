@@ -49,6 +49,7 @@ app.get('/api/about/:id', async (req, res) => {
     const assembledData = requestAssembler(data);
     // I think the line below can be deleted
     if (!assembledData) { throw 'gotBadData'; }
+    console.log(assembledData);
     res.send(assembledData);
   } catch (err) {
     res.sendStatus(404);

@@ -1,7 +1,6 @@
 # Service - About
+![Build Status](https://travis-ci.com/SDC-Builder/Tim-About-Service.svg?branch=main)
 
-[![Coverage Status](https://coveralls.io/repos/github/Ingenuity-rpt26/shane-service-about/badge.svg?branch=setup)](https://coveralls.io/github/Ingenuity-rpt26/shane-service-about?branch=setup)
-[![Build Status](https://www.travis-ci.com/Ingenuity-rpt26/shane-service-about.svg?branch=main)](https://www.travis-ci.com/Ingenuity-rpt26/shane-service-about)
 
 > Coursera About Service
 > Contains a description of the course, along with some strategic goals and possible outcomes of taking the course.
@@ -10,23 +9,23 @@
 
 ## Related Projects
 
-  - https://github.com/Ingenuity-rpt26/shane-proxy
-  - https://github.com/Ingenuity-rpt26/vinayService1
-  - https://github.com/Ingenuity-rpt26/Grant--Service_1
-  - https://github.com/Ingenuity-rpt26/jsmithService1
+  - https://github.com/SDC-Builder/Tim-Proxy-Server
+  - https://github.com/SDC-Builder/Tim-About-Service
 
 ## Table of Contents
 
 1. [Usage](#Usage)
 1. [CRUD_API](#CRUD_API)
-1. [Requirements](#requirements)
-1. [Development](#development)
+1. [API_Performance](#API_Performance)
 
 ## Usage
 
-> From within the `db` directory, run `seedRunner.js` to seed the database and wait for it to complete.
-> Run `npm build` to build the webpack bundle
-> Run `npm server-dev` to start the server. Server runs on port 3002.
+- Run `npm install` from the root directory to install dependencies
+- From within the `database` directory, run `csvCreator.js` to generate 10 million records.
+- Seed a Cassandra database with `database/cassandra/cassandraFiller.js`
+- Run `npm build` to build the webpack bundle
+- Run `npm server-dev` to start the server. Server runs on port 3002
+- Run `npm run test` to run the jest and Enzyme tests, CI/CD also enabled
 
 ## CRUD_API
 ### Endpoints:
@@ -139,21 +138,24 @@ Body: Record Deleted
 ```
 
 
-## Requirements
+## API_Performance
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
+### Local Testing
 
-- Node 6.13.0
-- etc
+- Using K6 I tested a Cassandra DB against a Postgres DB in local development
 
-## Development
+Database | Requests | Total Requests | Latency (ms) | % Status Code 200
+--- | --- | --- | --- | ---
+Cassandra | 10,000 RPS | 600000 | 3420 | 87%
+Postgres | 10,000 RPS | 60000 | 5026 | 79%
+Cassandra | 1,000 RPS | 600000 | 52 | 99%
+Postgres | 1,000 RPS | 60000 | 139 | 97%
 
-### Installing Dependencies
 
-From within the root directory:
 
-```sh
-npm install -g webpack
-npm install
-```
 
+### Deployment
+- Deployed 3 cassandra nodes and 3 EC2 Micro instances behind an NGINX load balancer
+- Sustained 1,500 RPS to random routes at back 10% of db, tested wtih Loader.io
+
+<img width="1248" alt="Screen Shot 2021-06-16 at 10 47 43 PM" src="https://user-images.githubusercontent.com/71040019/123898948-1edbd580-d91b-11eb-9d1a-aac97251ba99.png">
