@@ -7,6 +7,9 @@
 >
 > [View the sample on Coursera under "About this Course"](https://www.coursera.org/learn/machine-learning)
 
+Deployment Architecture
+![Server Design (1)](https://user-images.githubusercontent.com/71040019/123899600-5eef8800-d91c-11eb-8650-daf6c353eedf.jpeg)
+
 ## Related Projects
 
   - https://github.com/SDC-Builder/Tim-Proxy-Server
@@ -167,5 +170,3 @@ Google PageSpeed insight score of 99
 
 <img width="660" alt="Screen Shot 2021-06-21 at 11 42 21 PM" src="https://user-images.githubusercontent.com/71040019/123899243-a6c1df80-d91b-11eb-8578-b66656dd44ca.png">
 
-System Architecture
-![Server Design (1)](https://user-images.githubusercontent.com/71040019/123899600-5eef8800-d91c-11eb-8650-daf6c353eedf.jpeg)
